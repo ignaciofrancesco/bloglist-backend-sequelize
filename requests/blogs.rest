@@ -1,0 +1,26 @@
+### CREATE BLOG
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "author": "CArballada joa",
+  "url": "www.joacarballada.com",
+  "title": "Environment and science"
+}
+
+# {
+#   "author": "Dale Carnegie",
+#   "url": "www.carnegiecompany.com",
+#   "title": "How to win friends",
+#   "likes": "80"
+# }
+
+# {
+#   "author": "Dr. King",
+#   "url": "www.drkingblogs.com",
+#   "title": "The new era of slavery",
+#   "likes": "2"
+# }
+
+### DELETE BLOG
+DELETE http://localhost:3001/api/blogs/3
