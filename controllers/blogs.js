@@ -26,6 +26,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  const blogId = req.params.id;
+  const newLikes = req.body.likes;
+
+  try {
+    const blog = await Blog.findByPk(blogId);
+
+    if (!blog) {
+      res.status(404).end();
+    }
+
+    blog.likes = req.body.likes;
+
+    const updatedBlog = await blog.save();
+
+    res.status(200).json({ likes: newLikes });
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   const blogId = req.params.id;
 

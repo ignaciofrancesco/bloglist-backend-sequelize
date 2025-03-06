@@ -24,3 +24,11 @@ Content-Type: application/json
 
 ### DELETE BLOG
 DELETE http://localhost:3001/api/blogs/3
+
+### UPDATE LIKE COUNT
+PUT http://localhost:3001/api/blogs/1
+Content-Type: application/json
+
+{
+  "likes": "777"
+}
