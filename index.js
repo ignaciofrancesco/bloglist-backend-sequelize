@@ -1,10 +1,11 @@
 const { PORT } = require("./utils/config");
 const { connectToDatabase } = require("./utils/db");
+require("express-async-errors");
 
 const blogsRouter = require("./controllers/blogs");
 
 const express = require("express");
-require("express-async-errors");
+const usersRouter = require("./controllers/users");
 const app = express();
 
 /* MIDDLEWARE 1 */
@@ -14,6 +15,7 @@ app.use(express.json());
 /* ROUTES */
 
 app.use("/api/blogs", blogsRouter);
+app.use("/api/users", usersRouter);
 
 /* MIDDLEWARE 2 */
 

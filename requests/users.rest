@@ -1,0 +1,34 @@
+### CREATE USER
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "name": "Joaquin",
+  "username": "joacarba",
+  "password": "pass1"
+}
+
+# {
+#   "author": "Dale Carnegie",
+#   "url": "www.carnegiecompany.com",
+#   "title": "How to win friends",
+#   "likes": "80"
+# }
+
+# {
+#   "author": "Dr. King",
+#   "url": "www.drkingblogs.com",
+#   "title": "The new era of slavery",
+#   "likes": "2"
+# }
+
+### DELETE BLOG
+# DELETE http://localhost:3001/api/blogs/3
+
+### UPDATE USERNAME
+PUT http://localhost:3001/api/users/joacarba
+Content-Type: application/json
+
+{
+  "newUsername": "joaasecas"
+}
