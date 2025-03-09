@@ -6,7 +6,7 @@ const usersRouter = require("express").Router();
 
 usersRouter.get("/", async (req, res) => {
   const users = await User.findAll({
-    attributes: { exclude: ["hashedPassword", "id"] },
+    attributes: { exclude: ["hashedPassword"] },
   });
   res.json(users);
 });
@@ -41,7 +41,7 @@ usersRouter.put("/:username", async (req, res, next) => {
   }
 
   // Find the user by username
-  const user = await User.findOne({ attributes: username });
+  const user = await User.findOne({ where: username });
 
   if (!user) {
     const notFoundError = new Error("User not found.");

@@ -6,6 +6,7 @@ const blogsRouter = require("./controllers/blogs");
 
 const express = require("express");
 const usersRouter = require("./controllers/users");
+const loginRouter = require("./controllers/login");
 const app = express();
 
 /* MIDDLEWARE 1 */
@@ -14,6 +15,7 @@ app.use(express.json());
 
 /* ROUTES */
 
+app.use("/api/login", loginRouter);
 app.use("/api/blogs", blogsRouter);
 app.use("/api/users", usersRouter);
 
@@ -46,8 +48,11 @@ const errorHandler = (error, req, res, next) => {
     return res.status(404).json({ error: error.message });
   }
 
-  // Unknown errors
-  return res.status(500).json({ error: "Internal server error" });
+  if (error.name === "UnauthorizedError") {
+    return res.status(401).json({ error: error.message });
+  }
+  // Unknown errors, let the built in error handler do it
+  next(error);
 };
 
 app.use(errorHandler);

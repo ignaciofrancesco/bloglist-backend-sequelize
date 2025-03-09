@@ -3,8 +3,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "name": "Joaquin",
-  "username": "joacarba",
+  "name": "ignacio",
+  "username": "nacho@hotmail.com",
   "password": "pass1"
 }
 

@@ -1,15 +1,41 @@
 const { Blog } = require("../models/index.js");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../utils/config.js");
+const { findOne, findByPk } = require("../models/blog.js");
 
 const blogsRouter = require("express").Router();
+
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get("authorization");
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    try {
+      // It verifies the validity of the token. If it is invalid, it throws an exception.
+      req.decodedToken = jwt.verify(authorization.substring(7), JWT_SECRET);
+    } catch {
+      return res.status(401).json({ error: "token invalid" });
+    }
+  } else {
+    return res.status(401).json({ error: "token missing" });
+  }
+
+  next();
+};
 
 blogsRouter.get("/", async (req, res) => {
   const blogs = await Blog.findAll();
   res.json(blogs);
 });
 
-blogsRouter.post("/", async (req, res) => {
+blogsRouter.post("/", tokenExtractor, async (req, res) => {
+  // If i get to this place, the token as already been validated.
+
   const blog = req.body;
-  const createdBlog = await Blog.create(blog);
+  const { username, id } = req.decodedToken;
+
+  // Assign the new blog the user id
+  const createdBlog = await Blog.create({ ...blog, userId: id });
+
   res.status(201).json(createdBlog);
 });
 
