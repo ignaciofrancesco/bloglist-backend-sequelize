@@ -2,6 +2,7 @@ const { Blog, User } = require("../models/index.js");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config.js");
 const { findOne, findByPk } = require("../models/blog.js");
+const { Op } = require("sequelize");
 
 const blogsRouter = require("express").Router();
 
@@ -23,8 +24,21 @@ const tokenExtractor = (req, res, next) => {
 };
 
 blogsRouter.get("/", async (req, res) => {
+  const searchWord = req.query.search;
+
+  let where;
+
+  if (searchWord) {
+    where = {
+      title: {
+        [Op.iLike]: `%${searchWord}%`,
+      },
+    };
+  }
+
   const blogs = await Blog.findAll({
     include: { model: User, attributes: { exclude: ["hashedPassword"] } },
+    where,
   });
   res.json(blogs);
 });
