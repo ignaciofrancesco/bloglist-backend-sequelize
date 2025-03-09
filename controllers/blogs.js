@@ -66,13 +66,27 @@ blogsRouter.put("/:id", async (req, res, next) => {
   res.status(200).json({ likes: newLikes });
 });
 
-blogsRouter.delete("/:id", async (next, req, res) => {
+blogsRouter.delete("/:id", tokenExtractor, async (req, res, next) => {
+  console.log(req.params);
+  console.log(req.decodedToken);
+
   const blogId = req.params.id;
+  const loggedUserId = Number(req.decodedToken.id);
 
   if (!Number.isInteger(Number(blogId))) {
     const badRequestError = new Error("Invalid ID format");
     badRequestError.name = "BadRequestError";
     return next(badRequestError); // Pass the error to the error handler
+  }
+
+  const blog = await Blog.findByPk(blogId);
+
+  if (loggedUserId !== blog.userId) {
+    const unauthorizedError = new Error(
+      "Cannot delete a blog that is not yours."
+    );
+    unauthorizedError.name = "UnauthorizedError";
+    return next(unauthorizedError);
   }
 
   const result = await Blog.destroy({
