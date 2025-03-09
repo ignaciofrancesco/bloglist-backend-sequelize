@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "SHaMtwYLbRcx546hiev7YOHATWA2hSwK",
+    "database": "dbbloglist",
+    "host": "dpg-cv3nqrpu0jms73eblavg-a.virginia-postgres.render.com",
+    "dialect": "postgresql",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgresql"
+  }
+}
