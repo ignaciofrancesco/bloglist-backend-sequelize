@@ -1,4 +1,4 @@
-const { Blog } = require("../models/index.js");
+const { Blog, User } = require("../models/index.js");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config.js");
 const { findOne, findByPk } = require("../models/blog.js");
@@ -23,7 +23,9 @@ const tokenExtractor = (req, res, next) => {
 };
 
 blogsRouter.get("/", async (req, res) => {
-  const blogs = await Blog.findAll();
+  const blogs = await Blog.findAll({
+    include: { model: User, attributes: { exclude: ["hashedPassword"] } },
+  });
   res.json(blogs);
 });
 

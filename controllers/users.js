@@ -1,4 +1,4 @@
-const { User } = require("../models/index.js");
+const { User, Blog } = require("../models/index.js");
 const { SALT_ROUNDS } = require("../utils/config.js");
 const bcrypt = require("bcrypt");
 
@@ -6,6 +6,7 @@ const usersRouter = require("express").Router();
 
 usersRouter.get("/", async (req, res) => {
   const users = await User.findAll({
+    include: { model: Blog },
     attributes: { exclude: ["hashedPassword"] },
   });
   res.json(users);
