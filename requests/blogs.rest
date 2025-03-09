@@ -29,9 +29,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hY2hvQGhvdG1haWwuY29tIiwiaWQiOjIsImlhdCI6MTc0MTQ4NTAzOX0.IjMy1ZR-g49goZtJJeVnHoa6fp8AWNxTREeF3dUjPA4
 
 ### UPDATE LIKE COUNT
-PUT http://localhost:3001/api/blogs/1
+PUT http://localhost:3001/api/blogs/8
 Content-Type: application/json
 
 {
-  "likes": "777"
+  "likes": "1500"
 }
