@@ -30,9 +30,18 @@ blogsRouter.get("/", async (req, res) => {
 
   if (searchWord) {
     where = {
-      title: {
-        [Op.iLike]: `%${searchWord}%`,
-      },
+      [Op.or]: [
+        {
+          title: {
+            [Op.iLike]: `%${searchWord}%`,
+          },
+        },
+        {
+          author: {
+            [Op.iLike]: `%${searchWord}%`,
+          },
+        },
+      ],
     };
   }
 
