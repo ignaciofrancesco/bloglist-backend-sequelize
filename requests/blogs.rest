@@ -4,9 +4,10 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvYWFzZWNhcyIsImlkIjoxLCJpYXQiOjE3NDE0OTA4NDN9.qp72w98cMICbRB6zaTVQQLkKoNzxZijGOr4c5tBRbmA
 
 {
-  "author": "Theo",
+  "author": "Trump",
   "url": "www.t4.com",
-  "title": "React and you."
+  "title": "React and you.",
+  "likes": "1300"
 }
 
 # {
